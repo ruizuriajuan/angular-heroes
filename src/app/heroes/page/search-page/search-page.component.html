@@ -1,0 +1,24 @@
+<div class="flex flex-column p-2">
+    <mat-form-field class="example-full-width">
+        <input type="text" 
+               matInput
+               placeholder="Buscar heroe" 
+               [formControl]="searchInput" 
+               (input)="searchHero()"
+               [matAutocomplete]="auto" />
+
+               <mat-autocomplete autoActiveFirstOption 
+                                 #auto="matAutocomplete"
+                                 (optionSelected)="seleccionado($event)">
+                   @for (hero of heroes ; track hero) {
+                     <mat-option [value]="hero">{{hero.superhero}}</mat-option>
+                   }
+                   <!--
+                   @if (heroes.length===0 && searchInput.value && searchInput.value.length >0 ) {
+                      <mat-option>
+                        Sin registros encontrados con el termino {{searchInput.value}}
+                       </mat-option>
+                   }-->
+              </mat-autocomplete>
+    </mat-form-field>
+</div>

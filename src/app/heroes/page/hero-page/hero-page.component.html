@@ -1,0 +1,45 @@
+@if ( hero ) {
+<mat-toolbar>
+    <span>{{hero.superhero}}</span>
+    <span class="spacer"></span>
+    <button mat-mini-fab color="warn" (click)="onNoClick()"><mat-icon>close</mat-icon></button>
+</mat-toolbar>
+
+<mat-dialog-content>
+    <mat-grid-list cols="2" rowHeight="1:1">
+        <mat-grid-tile>
+            <img height="100%" [src]="hero|heroImage" [alt]="hero.superhero">
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-list>
+                <mat-list-item>
+                    <span matListItemTitle>Primera aparición</span>
+                    <span matLine>{{hero.first_appearance}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span matListItemTitle>Nombre</span>
+                    <span matLine>{{hero.alter_ego}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span matListItemTitle>Comic</span>
+                    <span matLine>{{hero.publisher}}</span>
+                </mat-list-item>
+
+                <span matListItemTitle>Personajes</span>
+                <mat-chip-listbox>
+                    @for (name of hero.characters.split(','); track $index) {
+                        <mat-chip>{{ name }}</mat-chip>
+                    }
+                </mat-chip-listbox>
+            </mat-list>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-dialog-content>
+
+} @else {
+<mat-grid-list cols="1">
+    <mat-grid-tile>
+        <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+</mat-grid-list>
+}
