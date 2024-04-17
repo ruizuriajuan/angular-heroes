@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <h2 mat-dialog-title>{{data.title}}</h2>
+</mat-toolbar>
+<mat-dialog-content >
+    <h2 >{{data.body}}</h2>
+</mat-dialog-content>
+<mat-dialog-actions  class="flex justify-content-end">
+    <button mat-button  mat-flat-button color="warn"  (click)="onCancel()">Cancelar</button>
+    <button mat-button   mat-flat-button color="primary" (click)="onAccpet()" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>

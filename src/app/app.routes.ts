@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
+import { AuthActivateGuard, AuthMatchGuard, AuthSessionActivateGuard } from './auth/services/auth.guard';
 
 export const routes: Routes = [
     {
         path: 'auth',
         loadComponent: () => import('./auth/layout-page.component'),
+        canActivate:[AuthSessionActivateGuard],
         children: [
             { path: 'login', loadComponent: () => import('./auth/page/login-page/login-page.component').then(c => c.LoginPageComponent) },
             { path: 'register', loadComponent: () => import('./auth/page/register-page/register-page.component').then(c => c.RegisterPageComponent) },
@@ -13,6 +15,7 @@ export const routes: Routes = [
     {
         path: 'heroes',
         loadComponent: () => import('./heroes/page/layout-page/layout-page.component'),
+        canActivate: [AuthActivateGuard],
         children: [
             { path: 'add', loadComponent: () => import('./heroes/page/new-page/new-page.component').then(c => c.NewPageComponent) },
             { path: 'search', loadComponent: () => import('./heroes/page/search-page/search-page.component').then(c => c.SearchPageComponent) },

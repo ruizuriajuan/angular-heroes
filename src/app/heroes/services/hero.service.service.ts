@@ -17,7 +17,7 @@ export class HeroService {
     return this.http.get<Hero[]>(`${this.baseUrl}/heroes`);
   }
 
-  getHero(id: string): Observable<Hero | undefined> {
+  getHero(id: string): Observable<Hero | undefined> {   
     return this.http.get<Hero>(`${this.baseUrl}/heroes/${id}`)
       .pipe(
         catchError(error => of(undefined))
@@ -27,10 +27,28 @@ export class HeroService {
   search(query: string): Observable<Hero[]> {
     //return this.http.get<Hero[]>(`${this.baseUrl}/heroes?q=${query}&_limit=6 `)
     console.log('query:', query);
-    return  this.getHeroes()
+    return this.getHeroes()
       .pipe(
         map(heroes => heroes.filter(({ superhero }) => superhero.toUpperCase().includes(query.toUpperCase()))),
         tap(heroes => console.log(heroes)),
       )
   }
+
+  addHero(hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(`${this.baseUrl}/heroes`, hero);
+  }
+
+  updateHero(hero: Hero): Observable<Hero> {
+    if (!hero.id) throw Error('Hero is required')
+    return this.http.patch<Hero>(`${this.baseUrl}/heroes/${ hero.id }`, hero );
+  }
+
+  deleteHero(id: string): Observable<boolean> {
+    return this.http.delete(`${this.baseUrl}/heroes/${id}`)
+      .pipe(
+        map(resp => true),
+        catchError(err => of(false))
+      );
+  }
+
 }

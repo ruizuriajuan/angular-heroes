@@ -19,7 +19,7 @@
     <mat-divider/>
     <mat-card-actions>
         <button mat-mini-fab color="primary" 
-                 [routerLink]="['/heroes/edit']" 
+                 [routerLink]="['/heroes/edit',hero.id]" 
                  title="Editar">
             <mat-icon>edit</mat-icon>
         </button>
